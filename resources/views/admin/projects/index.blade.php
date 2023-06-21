@@ -34,6 +34,7 @@
           <th scope="col">Start Date</th>
           <th scope="col">End Date</th>
           <th scope="col" class="text-center">Finished</th>
+          <th scope="col" class="text-center">Type</th>
           <th scope="col" class="text-center">Actions</th>
         </tr>
       </thead>
@@ -65,6 +66,7 @@
             <i class="fa-solid fa-x" style="color: #e01b24;"></i>
             @endif
           </td>
+          <td class="text-center"><span class="badge text-bg-primary">{{$project->type->name}}</span></td>
           <td class="text-center">
             <a href="{{route('admin.projects.show', $project)}}" class="btn btn-primary" title="Show"><i class="fa-solid fa-eye"></i></a>
             <a href="{{route('admin.projects.edit', $project)}}" class="btn btn-warning" title="Edit"><i class="fa-solid fa-pencil"></i></a>
