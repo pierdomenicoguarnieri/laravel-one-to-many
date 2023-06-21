@@ -23,6 +23,10 @@ class Project extends Model
     'image_original_name'
   ];
 
+  public function type(){
+    return $this->belongsTo(Type::class);
+  }
+
   public static function generateSlug($str){
     $slug = Str::slug($str, '-');
     $original_slug = $slug;
