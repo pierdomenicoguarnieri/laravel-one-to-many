@@ -32,7 +32,7 @@
         <select class="form-select @error('type_id') is-invalid @enderror" name="type_id">
           <option selected value="">Open this select menu</option>
           @foreach ($types as $type)
-          <option value="{{$type->id}}" @if($type->id == old('type', $project?->type->id)) selected @endif>{{$type->name}}</option>
+          <option value="{{$type->id}}" @if($type->id == old('type_id', $project?->type->id)) selected @endif>{{$type->name}}</option>
           @endforeach
         </select>
         @error('type_id')
