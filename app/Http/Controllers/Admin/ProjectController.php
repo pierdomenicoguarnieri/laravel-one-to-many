@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -38,7 +39,8 @@ class ProjectController extends Controller
       $title = 'Crea un progetto';
       $msg_button = 'Crea';
       $project = null;
-      return view('admin.projects.create_edit', compact('route', 'method', 'title','msg_button', 'project'));
+      $types = Type::all();
+      return view('admin.projects.create_edit', compact('route', 'method', 'title','msg_button', 'project', 'types'));
     }
 
     /**
@@ -87,7 +89,8 @@ class ProjectController extends Controller
       $method = 'PUT';
       $msg_button = 'Modifica';
       $title = 'Modifica il progetto: "' . $project->title . '"';
-      return view('admin.projects.create_edit', compact('route', 'method', 'title', 'msg_button', 'project'));
+      $types = Type::all();
+      return view('admin.projects.create_edit', compact('route', 'method', 'title', 'msg_button', 'project', 'types'));
     }
 
     /**

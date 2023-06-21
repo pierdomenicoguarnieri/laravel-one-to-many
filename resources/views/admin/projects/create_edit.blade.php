@@ -28,6 +28,19 @@
     @endif
 
     <div class="mb-3">
+      <label for="type_id" class="form-label">Tipo</label>
+        <select class="form-select @error('type_id') is-invalid @enderror" name="type_id">
+          <option selected value="">Open this select menu</option>
+          @foreach ($types as $type)
+          <option value="{{$type->id}}" @if($type->id == old('type', $project?->type->id)) selected @endif>{{$type->name}}</option>
+          @endforeach
+        </select>
+        @error('type_id')
+          <span class="text-danger">{{$message}}</span>
+        @enderror
+    </div>
+
+    <div class="mb-3">
       <label for="title" class="form-label">Titolo</label>
       <input
         type="text"

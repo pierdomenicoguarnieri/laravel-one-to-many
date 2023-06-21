@@ -24,6 +24,7 @@ class ProjectRequest extends FormRequest
   public function rules()
   {
     return [
+      'type_id' => 'nullable',
       'title' => 'required|min:5|max:255',
       'image' => 'nullable|image',
       'description' => 'nullable|min:20',
