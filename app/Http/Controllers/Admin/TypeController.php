@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TypeController extends Controller
 {
@@ -12,8 +14,10 @@ class TypeController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index(){
-    //
+  public function index()
+  {
+    $types = Type::all();
+    return view('admin.types.index', compact('types'));
   }
 
   /**
@@ -21,7 +25,8 @@ class TypeController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function create(){
+  public function create()
+  {
     //
   }
 
@@ -31,8 +36,18 @@ class TypeController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(Request $request){
-    //
+  public function store(Request $request)
+  {
+    $new_type = new Type();
+    $val_data = $request->validate(
+      [
+        'name' => 'required|unique:types|max:50'
+      ]
+    );
+    $val_data['slug'] = Str::slug($val_data['name'], '-');
+    $new_type->fill($val_data);
+    $new_type->save();
+    return redirect()->back()->with('message', "Hai creato correttamente il tipo $new_type->name");
   }
 
   /**
@@ -41,7 +56,8 @@ class TypeController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function show($id){
+  public function show($id)
+  {
     //
   }
 
@@ -51,7 +67,8 @@ class TypeController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function edit($id){
+  public function edit($id)
+  {
     //
   }
 
@@ -62,8 +79,16 @@ class TypeController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, $id){
-    //
+  public function update(Request $request, Type $type)
+  {
+    $val_data = $request->validate(
+      [
+        'name' => 'required|unique:categories|max:50'
+      ]
+    );
+    $val_data['slug'] = Str::slug($val_data['name'], '-');
+    $type->update($val_data);
+    return redirect()->back()->with('message', "Hai modificato correttamente la categoria $type->name");
   }
 
   /**
@@ -72,7 +97,9 @@ class TypeController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id){
-    //
+  public function destroy(Type $type){
+    $types = Type::all();
+    $type->delete();
+    return redirect()->route('admin.types.index', compact('types'))->with('deleted', "Il tipo '$type->title' è stato eliminato correttamente");
   }
 }

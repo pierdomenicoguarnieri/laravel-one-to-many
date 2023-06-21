@@ -70,7 +70,12 @@
           <td class="text-center">
             <a href="{{route('admin.projects.show', $project)}}" class="btn btn-primary" title="Show"><i class="fa-solid fa-eye"></i></a>
             <a href="{{route('admin.projects.edit', $project)}}" class="btn btn-warning" title="Edit"><i class="fa-solid fa-pencil"></i></a>
-            @include('admin.partials.modal')
+            @include('admin.partials.modal', [
+              'name' => $project->name,
+              'id' => $project->id,
+              'route' => route('admin.projects.destroy', $projects),
+              'type' => 'progetto'
+            ])
           </td>
         </tr>
         @endforeach

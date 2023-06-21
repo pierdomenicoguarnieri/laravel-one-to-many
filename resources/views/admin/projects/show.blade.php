@@ -9,7 +9,12 @@
   <h2 class="fs-4 text-secondary mb-4">
     Show "{{$project->title}}"
     <a href="{{route('admin.projects.edit', $project)}}" class="btn btn-warning ms-2" title="Edit"><i class="fa-solid fa-pencil"></i></a>
-    @include('admin.partials.modal')
+    @include('admin.partials.modal', [
+      'name' => $project->name,
+      'id' => $project->id,
+      'route' => route('admin.projects.destroy', $projects),
+      'type' => 'progetto'
+    ])
   </h2>
 
   <a href="{{route('admin.projects.index')}}" class="btn btn-primary mb-4">Torna all'index</a>
